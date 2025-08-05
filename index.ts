@@ -1,15 +1,16 @@
-let user: undefined;
-// console.log(user);
+const safeInt = Number.MAX_SAFE_INTEGER;
+console.log(safeInt);
+const safeIntPlusOne = safeInt + 1;
+const safeIntPlusTwo = safeInt + 2;
+console.log(safeIntPlusOne);
+console.log(safeIntPlusTwo);
 
-let userRole: null;
-userRole = null;
-// console.log(userRole);
+let bigInt1: bigint = BigInt(1234);
+let bigInt2: bigint = 123434543n;
+console.log(bigInt1);
 
-console.log(userRole === user);
-if (!userRole) {
-  console.log("This condition is true")
-}
+let c: bigint = bigInt1 - bigInt2;
 
-if (!user) {
-  console.log("This condition is true")
-}
+let e: bigint = 123456n;
+
+let f = Math.log(bigInt1);
