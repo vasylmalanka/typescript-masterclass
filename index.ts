@@ -1,22 +1,27 @@
-let person = {
-  name: "Mark",
-  age: 32,
+// let post: {
+//   title: string;
+//   content: string;
+//   date: Date;
+// } = {
+//   title: "This is a blog post",
+//   content: "Content of the post",
+//   date: new Date(),
+// };
+
+type Post = {
+  title: string,
+  content: string,
+  date: Date,
 };
 
-let car: Object = {
-  brand: "BMW",
-  color: "black",
+let post: Post = {
+  title: "This is a blog post",
+  content: "Content of the post",
+  date: new Date(),
 };
 
-car = [];
-car = () => [];
-
-let newCar: {
-  brand: string;
-  color: string;
-} = {
-  brand: "BMW",
-  color: "black",
+let post2: Post = {
+  title: "This is a blog post",
+  content: "Content of the post",
+  date: new Date(),
 };
-
-newCar = [];
