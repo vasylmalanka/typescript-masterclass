@@ -1,9 +1,9 @@
-function multiplyByTwo (number: unknown) {
-  if (typeof number === "number") {
-    return number * 2;
-  }
-  return "Please provide a valid number";
-}
+type CustomString = string;
+type CustomNumber = number;
+type CustomDate = Date;
+type CustomSymbol = Symbol;
 
-console.log(multiplyByTwo(4));
-console.log(multiplyByTwo("string"));
+let firstname: CustomString = "Mark";
+let age: CustomNumber = 32;
+let today: CustomDate = new Date();
+let unique: CustomSymbol = Symbol();
