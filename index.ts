@@ -1,20 +1,16 @@
-// Duck Typing is used by TypeScript for inference of types.
-//* "If it looks like a duck and quacks like a duck, it's a duck".
-// Declaration
-type CustomString = string;
-type CustomNumber = number;
-type CustomDate = Date;
-type CustomSymbol = Symbol;
+type StringOrNumber = string | number;
+type NumberOrUndefined = number | undefined;
+type StringNumberOrUndefined = string | number | undefined;
+type DateOrUndefined = Date | undefined;
 
-// Annotation
-let firstname: CustomString = "Mark";
-let age: CustomNumber = 32;
-let today: CustomDate = new Date();
-let unique: CustomSymbol = Symbol();
+let stringOrNumber: StringOrNumber = 1233;
 
-function addNumbers(a: number, b: number) {
-  return a + b;
+function print (input?: string | undefined) {
+  if (input) {
+    console.log(input);
+  }
+  console.log("Please input something to print");
 }
 
-// Inference
-let finalResult = addNumbers(10, 15);
+print();
+print("Hello World");
