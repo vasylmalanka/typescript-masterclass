@@ -1,19 +1,35 @@
-type Cat = {
-  name: string;
-  purrs: boolean;
-  color: string;
+type Caterer = {
+  name: string,
+  address: string,
+  phone: number,
 }
 
-type Dog = {
-  name: string;
-  barks: boolean;
-  color: string;
+type Seats = {
+  [keyof: string]: string;
 }
-type HybridAnimal = Cat & Dog;
 
-let hybridAnimal: HybridAnimal = {
-  name: "Max",
-  color: "white",
-  purrs: false,
-  barks: true,
+type Airplane = {
+  model: string;
+  flightNumber: string;
+  timeOfDeparture: Date;
+  timeOfArrival: Date;
+  caterer: Caterer;
+  seats: Seats;
 }
+
+let airplane: Airplane = {
+  model: "Airbus A380",
+  flightNumber: "A2201",
+  timeOfDeparture: new Date(),
+  timeOfArrival: new Date(),
+  caterer: {
+    name: "Special Food Ltd",
+    address: "484, Some Street, New York",
+    phone: 7867856751,
+  },
+  seats: {
+    A1: "John Doe",
+    A2: "Mark Doe",
+    A3: "Sam Doe",
+  },
+};
