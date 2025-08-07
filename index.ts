@@ -1,29 +1,31 @@
-type Dog = {
+type Contact = {
+  email: string;
+  phone?: string;
+};
+
+type Preferences = {
+  theme: "light" | "dark";
+  language: "English" | "Spanish";
+};
+
+type User = {
+  readonly id: number;
   name: string;
-  barks: boolean;
-  wags: boolean;
+  age?: number;
+  contact: Contact;
+  preferences: Preferences;
+  [key: string]: any;
 };
 
-type Cat = {
-  name: string;
-  purrs: boolean;
+let user: User = {
+  id: 1,
+  name: "John Doe",
+  contact: {
+      email: "john@example.com",
+  },
+  preferences: {
+      theme: "dark",
+      language: "English",
+  },
+  additionalInfo: "This is an example of an index signature property",
 };
-
-type DogAndCatUnion = Dog | Cat;
-
-let dog: DogAndCatUnion = {
-  name: "Buddy",
-  barks: true,
-  wags: true,
-};
-
-let cat: DogAndCatUnion = {
-  name: "Bella",
-  purrs: true,
-}
-
-let hybridAnimal: DogAndCatUnion = {
-  name: "Bella",
-  purrs: true,
-  barks: true,
-}
