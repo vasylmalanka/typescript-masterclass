@@ -1,31 +1,33 @@
-type Contact = {
-  email: string;
-  phone?: string;
+type NetworkLoadingState = {
+  state: "loading";
 };
 
-type Preferences = {
-  theme: "light" | "dark";
-  language: "English" | "Spanish";
+type NetworkFailedState = {
+  state: "failed";
+  code: number;
 };
 
-type User = {
-  readonly id: number;
-  name: string;
-  age?: number;
-  contact: Contact;
-  preferences: Preferences;
-  [key: string]: any;
+type NetworkSuccessState = {
+  state: "success";
+  response: {
+    title: string;
+    duration: number;
+    summary: string;
+  };
 };
 
-let user: User = {
-  id: 1,
-  name: "John Doe",
-  contact: {
-      email: "john@example.com",
-  },
-  preferences: {
-      theme: "dark",
-      language: "English",
-  },
-  additionalInfo: "This is an example of an index signature property",
-};
+type NetworkState =
+  | NetworkLoadingState
+  | NetworkFailedState
+  | NetworkSuccessState;
+
+function logger (state: NetworkState) {
+  switch (state.state) {
+    case "loading": 
+      return "Loading ...";
+    case "failed":
+      return `Error ${state.code}`;
+    case "success":
+      return `Downloading ${state.response.title}`;
+  }
+}
