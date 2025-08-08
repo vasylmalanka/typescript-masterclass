@@ -1,41 +1,14 @@
-let a: number[] = [1, 2, 3];
-let b: Array<string> = ["a", "b", "c"];
-let c: (string | number | boolean)[] = ["a", 1, true];
+let person: [string, string, number] = ["John", "Doe", 18];
 
-type Caterer = {
-  name: string,
-  address: string,
-  phone: number,
-}
+type User = [string, string, number, string?];
+let user: User = ["Mark", "Doe", 32, "mark@email.com"];
 
-type Seats = {
-  [keyof: string]: string;
-}
+type ListOfStudents = [number, boolean, ...string[]];
 
-type Airplane = {
-  model: string;
-  flightNumber: string;
-  timeOfDeparture: Date;
-  timeOfArrival: Date;
-  caterer: Caterer;
-  seats: Seats;
-}
+const passingStudents: ListOfStudents = [3, true, "John", "Stella", "Mark"];
 
-type Airplanes = Airplane[];
+type StringBooleansNumber = [string, ...boolean[], number];
+type BooleansStringNumber = [...boolean[], string, number];
 
-let airplanes: Airplanes = [{
-  model: "Airbus A380",
-  flightNumber: "A2201",
-  timeOfDeparture: new Date(),
-  timeOfArrival: new Date(),
-  caterer: {
-    name: "Special Food Ltd",
-    address: "484, Some Street, New York",
-    phone: 7867856751,
-  },
-  seats: {
-    A1: "John Doe",
-    A2: "Mark Doe",
-    A3: "Sam Doe",
-  },
-}];
+let stringBooleansNumber: StringBooleansNumber = ["string", true, false, 32];
+let booleansStringNumber: BooleansStringNumber = [true, "string", 32];
