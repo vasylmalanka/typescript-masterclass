@@ -1,24 +1,11 @@
-enum Direction {
-  Up, // 0
-  Down, // 1
-  Left, // 2
-  Right, // 3
-};
+enum AccessPermissions {
+  None = 0,
+  Read = 1,
+  Write = 2,
+  ReadWrite = Read + Write, // 3
+  Delete = 4,
+  All = ReadWrite | Delete, // 7
+}
 
-const enum EDirection {
-  Up, // 0
-  Down, // 1
-  Left, // 2
-  Right, // 3
-};
-
-const ODirection = {
-  Up: 0,
-  Down: 1,
-  Left: 2,
-  Right: 3,
-} as const;
-
-let eDirection = EDirection.Up;
-let direction = Direction.Right;
-ODirection.Up = "newValue";
+console.log(AccessPermissions.ReadWrite);
+console.log(AccessPermissions.All);

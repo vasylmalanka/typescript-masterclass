@@ -1,6 +1,7 @@
 {
   "name": "typescript-masterclass",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "main": "index.ts",
   "scripts": {
@@ -19,6 +20,10 @@
   },
   "homepage": "https://github.com/vasylmalanka/typescript-masterclass#readme",
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@typescript-eslint/eslint-plugin": "^8.39.0",
+    "@typescript-eslint/parser": "^8.39.0",
+    "eslint": "^9.32.0",
     "typescript": "^5.9.2"
   }
 }
