@@ -1,11 +1,26 @@
-enum AccessPermissions {
-  None = 0,
-  Read = 1,
-  Write = 2,
-  ReadWrite = Read + Write, // 3
-  Delete = 4,
-  All = ReadWrite | Delete, // 7
+enum ShapeKind {
+  Circle = 'circle',
+  Square = 'square',
+}
+// Circle | Square
+
+type Circle = {
+  kind: ShapeKind.Circle;
+  radius: number;
 }
 
-console.log(AccessPermissions.ReadWrite);
-console.log(AccessPermissions.All);
+type Square = {
+  kind: ShapeKind.Square;
+  sideLength: number;
+}
+
+let  circle: Circle = {
+  radius: 100,
+  kind: ShapeKind.Square,
+};
+
+function printShape(shape: ShapeKind /** Circle | Square */) {
+  console.log(shape);
+}
+
+printShape(ShapeKind.Circle);
