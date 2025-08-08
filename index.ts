@@ -1,3 +1,7 @@
+let a: number[] = [1, 2, 3];
+let b: Array<string> = ["a", "b", "c"];
+let c: (string | number | boolean)[] = ["a", 1, true];
+
 type Caterer = {
   name: string,
   address: string,
@@ -17,7 +21,9 @@ type Airplane = {
   seats: Seats;
 }
 
-let airplane: Airplane = {
+type Airplanes = Airplane[];
+
+let airplanes: Airplanes = [{
   model: "Airbus A380",
   flightNumber: "A2201",
   timeOfDeparture: new Date(),
@@ -32,4 +38,4 @@ let airplane: Airplane = {
     A2: "Mark Doe",
     A3: "Sam Doe",
   },
-};
+}];
