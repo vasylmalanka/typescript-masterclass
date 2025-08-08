@@ -1,14 +1,15 @@
-let person: [string, string, number] = ["John", "Doe", 18];
+let numbers: readonly number[] = [1, 2, 3];
 
-type User = [string, string, number, string?];
-let user: User = ["Mark", "Doe", 32, "mark@email.com"];
+numbers.push(2);
 
-type ListOfStudents = [number, boolean, ...string[]];
+type ReadOnlyTuple = readonly [string, string, number];
 
-const passingStudents: ListOfStudents = [3, true, "John", "Stella", "Mark"];
+let person: ReadOnlyTuple = ["John", "Doe", 21];
+person[0] = "Mark";
 
-type StringBooleansNumber = [string, ...boolean[], number];
-type BooleansStringNumber = [...boolean[], string, number];
+// array
+type a = Readonly<string[]>;
+type b = ReadonlyArray<(string | number)>
 
-let stringBooleansNumber: StringBooleansNumber = ["string", true, false, 32];
-let booleansStringNumber: BooleansStringNumber = [true, "string", 32];
+// tuple
+type c = Readonly<[number, string, number]>;
