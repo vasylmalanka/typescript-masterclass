@@ -1,34 +1,9 @@
-enum AgeUnit {
-  Years = 'years',
-  Months = 'months',
-}
+const students: string[] = ['Alice', 'Bob', 'Mark'];
 
-type GreetingFunction = (greeting: string, /** add: string */) => string;
+students.map((student) => {
+  console.log(student);
+});
 
-type Person = {
-  name: string;
-  age: number;
-  ageUnit: AgeUnit;
-  // greet: Function;
-  greet: GreetingFunction;
-};
-
-let person: Person = {
-  name: 'Scott',
-  age: 30,
-  ageUnit: AgeUnit.Years,
-  greet: (greeting) => {
-    return `${greeting} ${person.name}`;
-  },
-};
-
-function convertAgeToMonths(person: Person): Person {
-  if (person.ageUnit === AgeUnit.Years) {
-    person.age = person.age * 12;
-    person.ageUnit = AgeUnit.Months;
-  }
-  return person;
-}
-
-console.log(convertAgeToMonths(person));
-console.log(person.greet('Hello'));
+students.map(function (student) {
+  console.log(student);
+});
