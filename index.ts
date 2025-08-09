@@ -1,54 +1,41 @@
-const str = 'Hello, World!';
+/**
+ * Practice Excercise for functions
+ */
 
-const part1 = str.slice(7);
-const part2 = str.slice(7, 10);
+//* 1. Declare a function named greet that takes a string parameter name and returns a greeting message.
+function greet (name: string): string {
+  return `Hello, ${name}!`;
+}
 
-console.log(part1);
-console.log(part2);
-
-type Reservation = {
-  departureDate: Date;
-  returnDate?: Date;
-  departingFrom: string;
-  destination: string;
+//* 2. Define an type Product with properties id (number) and name (string). Create a function named getProduct that takes an id parameter and returns a Product.
+type Product = {
+  id: number;
+  name: string;
 };
 
-type Reserve = {
-  (
-    departureDate: Date,
-    returnDate: Date,
-    departingFrom: string,
-    destination: string,
-  ): Reservation | never;
-  (
-    departureDate: Date,
-    departingFrom: string,
-    destination: string,
-  ): Reservation | never;
+function getProduct(id: number): Product
+{
+  return {
+    id: id,
+    name: 'Example Product 1',
+  };
+}
+
+//* 3. Declare a function signature named Calculator as a type that takes two numbers and returns a number. Implement two functions add and subtract that match this signature.
+type Calculator = (a: number, b: number) => number;
+
+const add: Calculator = (a: number, b: number): number => {
+  return a + b;
+};
+const subtract: Calculator = (a: number, b: number): number => {
+  return a - b;
 };
 
-const reserve: Reserve = (
-  departureDate: Date,
-  returnDateOrDepartingFrom: Date | string,
-  departingFromOrDestination: string,
-  destination?: string
-) => {
-  if (returnDateOrDepartingFrom instanceof Date && destination) {
-    return {
-      departureDate: departureDate,
-      returnDate: returnDateOrDepartingFrom,
-      departingFrom: departingFromOrDestination,
-      destination: destination,
-    };
-  } else if (typeof returnDateOrDepartingFrom === 'string') {
-    return {
-      departureDate: departureDate,
-      departingFrom: returnDateOrDepartingFrom,
-      destination: departingFromOrDestination,
-    };
-  }
-  throw new Error('Please provide valid details to reserve a ticket');
-};
+//* 4. Create a function named logMessage that takes a string message and logs it to the console, returning void. Also, create a function named throwError that takes a string message and throws an error, returning never.
+function logMessage(message: string): void {
+  console.log(message);
+}
 
-console.log(reserve(new Date(), new Date(), 'New York', 'Washington'));
-console.log(reserve(new Date(), 'New York', 'Washington'));
+function throwError(message: string): never {
+  throw new Error(message);
+}
