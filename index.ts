@@ -1,18 +1,30 @@
-type Numbers = {
-  a: number;
-  b: number;
-  c: number;
+type FetchDataFunction = (url: string, ...queryStrings: string[]) => Promise<string[]>;
+
+const fetchData: FetchDataFunction = async (url: string, ...queryStrings: string[]): Promise<string[]> => {
+  const queryString = queryStrings.length > 0 ? `?${queryStrings.join('&')}` : '';
+  const fullUrl = `${url}${queryString}`;
+  const response = await fetch(fullUrl);
+  const data: string[] = await response.json();
+
+  return data;
 };
 
-let numbersObject: Numbers = {
-  a: 2,
-  b: 3,
-  c: 4,
-};
+fetchData('https://api.example.com', 'param1=value1', 'param2=value2');
 
-function sum({ a, b, c }: Numbers) {
-  return a + b + c;
+type User = {
+  firstName: string;
+  lastName: string;
+  age: number;
 }
 
-console.log(sum(numbersObject));
-console.log(sum({a: 3, b: 4, c: 'string'}));
+const user: User = {
+  firstName: 'John',
+  lastName: 'Doe',
+  age: 30,
+};
+
+async function getUserInfo ({ firstName, lastName, age }: User): Promise<string> {
+  return `User: ${firstName} ${lastName}, Age: ${age}`;
+}
+
+getUserInfo(user);
