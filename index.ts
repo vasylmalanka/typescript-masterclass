@@ -1,9 +1,10 @@
-const students: string[] = ['Alice', 'Bob', 'Mark'];
+function writeToDatabase(value: string): void {
+  console.log('Writing to a database', value);
+}
 
-students.map((student) => {
-  console.log(student);
-});
+function throwError (error: string): never/** or void */ {
+  throw new Error(error);
+}
 
-students.map(function (student) {
-  console.log(student);
-});
+type check = never extends void ? true: false;
+type check2 = void extends never ? true: false;
