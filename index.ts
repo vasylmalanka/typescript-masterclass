@@ -1,30 +1,54 @@
-type FetchDataFunction = (url: string, ...queryStrings: string[]) => Promise<string[]>;
+const str = 'Hello, World!';
 
-const fetchData: FetchDataFunction = async (url: string, ...queryStrings: string[]): Promise<string[]> => {
-  const queryString = queryStrings.length > 0 ? `?${queryStrings.join('&')}` : '';
-  const fullUrl = `${url}${queryString}`;
-  const response = await fetch(fullUrl);
-  const data: string[] = await response.json();
+const part1 = str.slice(7);
+const part2 = str.slice(7, 10);
 
-  return data;
+console.log(part1);
+console.log(part2);
+
+type Reservation = {
+  departureDate: Date;
+  returnDate?: Date;
+  departingFrom: string;
+  destination: string;
 };
 
-fetchData('https://api.example.com', 'param1=value1', 'param2=value2');
-
-type User = {
-  firstName: string;
-  lastName: string;
-  age: number;
-}
-
-const user: User = {
-  firstName: 'John',
-  lastName: 'Doe',
-  age: 30,
+type Reserve = {
+  (
+    departureDate: Date,
+    returnDate: Date,
+    departingFrom: string,
+    destination: string,
+  ): Reservation | never;
+  (
+    departureDate: Date,
+    departingFrom: string,
+    destination: string,
+  ): Reservation | never;
 };
 
-async function getUserInfo ({ firstName, lastName, age }: User): Promise<string> {
-  return `User: ${firstName} ${lastName}, Age: ${age}`;
-}
+const reserve: Reserve = (
+  departureDate: Date,
+  returnDateOrDepartingFrom: Date | string,
+  departingFromOrDestination: string,
+  destination?: string
+) => {
+  if (returnDateOrDepartingFrom instanceof Date && destination) {
+    return {
+      departureDate: departureDate,
+      returnDate: returnDateOrDepartingFrom,
+      departingFrom: departingFromOrDestination,
+      destination: destination,
+    };
+  } else if (typeof returnDateOrDepartingFrom === 'string') {
+    return {
+      departureDate: departureDate,
+      departingFrom: returnDateOrDepartingFrom,
+      destination: departingFromOrDestination,
+    };
+  }
+  throw new Error('Please provide valid details to reserve a ticket');
+};
 
-getUserInfo(user);
+console.log(reserve(new Date(), new Date(), 'New York', 'Washington'));
+console.log(reserve(new Date(), 'New York', 'Washington'));
