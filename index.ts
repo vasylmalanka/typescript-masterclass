@@ -1,17 +1,15 @@
-async function fetchFromDatabase(id: number): Promise<any> {}
-
-const anotherAsyncFunction = async (): Promise<any> => {};
-
-async function returnString(id: number): Promise<string> {
-  return Promise.resolve('string');
+function multiplyBy(by: number, ...numbers: number[]) {
+  return numbers.map((number) => by * number);
 }
 
+console.log(multiplyBy(2, 3, 4, 5, 6));
+console.log(multiplyBy(2, 3, 4, 5));
 
-type User = {
-  name: string;
-  age: number;
-}
+const args = [8, 5];
+const angle = Math.atan2(...args);
 
-async function returnUser(id: number): Promise<User> {
-  return Promise.resolve({name: 'John', age: 20});
-}
+const args1 = [8, 5] as const;
+const angle1 = Math.atan2(...args1);
+
+const args2: [number, number] = [8, 5];
+const angle2 = Math.atan2(...args2);
