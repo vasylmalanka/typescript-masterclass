@@ -1,7 +1,27 @@
-// named function
-function intro(name: string, age: number, country?: string): string {
-  return `My name is ${name} and I am ${age} years old`;
+enum AgeUnit {
+  Years = 'years',
+  Months = 'months',
 }
 
-intro ('John', 32);
-intro ('John', 32, 'USA');
+type Person = {
+  name: string;
+  age: number;
+  ageUnit: AgeUnit;
+}
+
+const person: Person = {
+  name: 'Scott',
+  age: 30,
+  ageUnit: AgeUnit.Years,
+};
+
+function convertAgeToMonths(person: Person): Person {
+  if (person.ageUnit === AgeUnit.Years) {
+    person.age = person.age * 12;
+    person.ageUnit = AgeUnit.Months;
+  }
+
+  return person;
+}
+
+console.log(convertAgeToMonths(person));
