@@ -1,27 +1,17 @@
-type LogMessage = (message: string) => void;
+async function fetchFromDatabase(id: number): Promise<any> {}
 
-const log: LogMessage = (message: string): void => {
-  console.log(message);
-};
+const anotherAsyncFunction = async (): Promise<any> => {};
 
-log('Hello TypeScript');
-
-type ThrowError = (message: string) => never;
-
-const throwError: ThrowError = (message: string): never => {
-  throw new Error(message);
-};
-
-// throwError('Test error');
-
-function processData(data: string): void {
-  log(`Processing ${data}`);
+async function returnString(id: number): Promise<string> {
+  return Promise.resolve('string');
 }
 
-processData('sample data');
 
-function errorHandlingScenario(): never {
-  throwError('An unexpected error occurred!');
+type User = {
+  name: string;
+  age: number;
 }
 
-errorHandlingScenario();
+async function returnUser(id: number): Promise<User> {
+  return Promise.resolve({name: 'John', age: 20});
+}
