@@ -1,14 +1,7 @@
 // named function
-function intro(name: string, age: number): string {
+function intro(name: string, age: number, country?: string): string {
   return `My name is ${name} and I am ${age} years old`;
 }
 
-// Function expression
-const intro2 = function (name: string, age: number): string {
-  return `My name is ${name} and I am ${age} years old`;
-};
-
-// Arrow function
-const intro3 = (name: string, age: number): string | number => {
-  return 1234;
-};
+intro ('John', 32);
+intro ('John', 32, 'USA');
