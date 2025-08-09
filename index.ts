@@ -1,28 +1,34 @@
-type GreetFunction = (name?: string) => string;
+enum AgeUnit {
+  Years = 'years',
+  Months = 'months',
+}
 
-const greet: GreetFunction = (name: string = 'Guest'): string => {
-    return `Hello, ${name}!`;
+type GreetingFunction = (greeting: string, /** add: string */) => string;
+
+type Person = {
+  name: string;
+  age: number;
+  ageUnit: AgeUnit;
+  // greet: Function;
+  greet: GreetingFunction;
 };
 
-console.log(greet());
-console.log(greet('John'));
-
-
-type AreaFunction = (width: number, height?: number) => number;
-
-const calculateArea: AreaFunction = (width: number, height: number = 10): number => {
-    return width * height;
+let person: Person = {
+  name: 'Scott',
+  age: 30,
+  ageUnit: AgeUnit.Years,
+  greet: (greeting) => {
+    return `${greeting} ${person.name}`;
+  },
 };
 
-console.log(calculateArea(5));
-console.log(calculateArea(5, 20));
+function convertAgeToMonths(person: Person): Person {
+  if (person.ageUnit === AgeUnit.Years) {
+    person.age = person.age * 12;
+    person.ageUnit = AgeUnit.Months;
+  }
+  return person;
+}
 
-
-type StatusFunction = (isActive?: boolean) => string;
-
-const checkStatus: StatusFunction = (isActive: boolean = true): string => {
-    return isActive ? 'Active' : 'Inactive';
-};
-
-console.log(checkStatus());
-console.log(checkStatus(false));
+console.log(convertAgeToMonths(person));
+console.log(person.greet('Hello'));
