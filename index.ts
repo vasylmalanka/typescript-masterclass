@@ -1,26 +1,22 @@
-async function fetchData<T = any>(url: string): Promise<T> {
-  const response = await fetch(url);
-  const data = await response.json();
-  return data;
+const filter = (array: any[], predicate: (item: any) => boolean) => {
+  let result: any[] = [];
+  for (let i = 0; i < array.length; i++) {
+    if (predicate(array[i])) {
+      result.push(array[i]);
+    }
+  }
+  return result;
+};
+
+let numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+function predicate(item: number) {
+  return item > 7;
 }
 
-async function fetchDefault() {
-  const data = await fetchData('https://jsonplaceholder.typicode.com/posts/1');
-  console.log(data);
+let animals = ['cat', 'dog', 'rat'];
+function filterCat(item: string) {
+  return item === 'cat';
 }
 
-// fetchDefault();
-
-type Post = {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
-
-async function fetchPost() {
-  const post = await fetchData<Post>('https://jsonplaceholder.typicode.com/posts/1');
-  console.log(post);
-}
-
-fetchPost();
+console.log(filter(numbers, predicate));
+console.log(filter(animals, filterCat));
