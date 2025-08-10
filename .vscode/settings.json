@@ -3,5 +3,9 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.eslint": "explicit"
     },
-    "eslint.execArgv": null
+    "eslint.execArgv": null,
+    "github.copilot.enable": {
+      "*": false
+    },
+    "files.insertFinalNewline": true
 }
