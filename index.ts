@@ -4,8 +4,8 @@ type Filter = {
   (array: object[], predicate: (item: object) => boolean): object[];
 }
 
-const filter = (array: any[], predicate: (item: any) => boolean) => {
-  let result: any[] = [];
+const filter = <T>(array: T[], predicate: (item: T) => boolean): T[] => {
+  let result: T[] = [];
   for (let i = 0; i < array.length; i++) {
     if (predicate(array[i])) {
       result.push(array[i]);
