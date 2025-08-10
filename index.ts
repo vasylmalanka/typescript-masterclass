@@ -1,37 +1,36 @@
-type GetFirstElement = <T>(arr: T[]) => T;
-
-const getFirstElement: GetFirstElement = (arr) => {
-  return arr[0];
-};
-
-const numbersArray = [1, 23, 4, 5];
-const stringArray = ['a', 'v'];
-
-let numberOutput = getFirstElement(numbersArray);
-let stringArrayOutput = getFirstElement<string>(stringArray);
-
-type FirstElement<T> = (arr: T[]) => T;
-
-const firstElement: FirstElement<string> = (arr) => {
-  return arr[0];
-};
-
-const firstElementNumber: FirstElement<number> = (arr) => {
-  return arr[0];
-};
-
-firstElement(['123']);
-
-type HasLength = {
-  length: number;
-};
-
-function logLength<T extends HasLength>(item: T): void {
-  console.log(item.length);
+type KeyValuePair<K, V> = {
+  key: K;
+  value: V;
 }
 
-logLength(numbersArray);
-logLength(stringArray);
-logLength('stringArray');
+let stringNumberPair: KeyValuePair<string, number> = {
+  key: 'age',
+  value: 30,
+};
 
-logLength({ name: 'John', length: 12 });
+let numberArrayPair: KeyValuePair<number, string[]> = {
+  key: 1234,
+  value: ['a'],
+};
+
+type HasId = {
+  id: number;
+}
+
+function printId<T extends HasId>(obj: T) {
+  console.log(obj.id);
+}
+
+const user = {
+  id: 1234,
+  name: 'Alice',
+};
+
+printId(user);
+
+const product = {
+  id: 123,
+  name: 'Laptop',
+};
+
+printId(product);
