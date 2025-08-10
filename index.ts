@@ -1,36 +1,44 @@
-type KeyValuePair<K, V> = {
-  key: K;
-  value: V;
-}
-
-let stringNumberPair: KeyValuePair<string, number> = {
-  key: 'age',
-  value: 30,
-};
-
-let numberArrayPair: KeyValuePair<number, string[]> = {
-  key: 1234,
-  value: ['a'],
-};
-
-type HasId = {
+type Events = {
   id: number;
+  date: Date;
+  type: 'indoor' | 'outdoor';
 }
 
-function printId<T extends HasId>(obj: T) {
-  console.log(obj.id);
+type UnionOfKeysOfEvents = keyof Events; // id | date | type
+
+let idOfEvent: UnionOfKeysOfEvents = 'id';
+let dateOfEvents: UnionOfKeysOfEvents = 'date';
+
+// Index Signature
+type Numeric = {
+  [key: number]: string;
 }
 
-const user = {
-  id: 1234,
-  name: 'Alice',
+type NumericKeyof = keyof Numeric;
+
+type NumberAndString = {
+  [key: string]: string;
+}
+
+type NumberAndStringKeyf = keyof NumberAndString;
+
+let stringObject: NumberAndString = {
+  0: 'First',
+  second: 'Second',
 };
 
-printId(user);
+console.log(stringObject['0']);
 
-const product = {
-  id: 123,
-  name: 'Laptop',
+type Person = {
+  name: string;
+  age: string;
+  address: string;
+}
+
+type PartialPerson = {
+  [K in keyof Person]?: Person[K];
+}
+
+let partial: PartialPerson = {
+  name: 'John',
 };
-
-printId(product);
