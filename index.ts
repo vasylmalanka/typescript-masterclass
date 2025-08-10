@@ -1,18 +1,23 @@
-function returnParams<Type>(param: Type): Type {
-  return param;
-}
+type GetFirstElement = <T>(arr: T[]) => T;
 
-const return1 = returnParams<string>('123');
-const return2 = returnParams<number>(123);
-
-const myParam: <T>(param: T) => T = (param) => param;
-
-const myParam2 = function <U>(param: U): U {
-  return param;
+const getFirstElement: GetFirstElement = (arr) => {
+  return arr[0];
 };
 
-type ObjectType = {
-  myParam: <V, X>(param: V, param2: X) => V | X;
+const numbersArray = [1, 23, 4, 5];
+const stringArray = ['a', 'v'];
+
+let numberOutput = getFirstElement(numbersArray);
+let stringArrayOutput = getFirstElement<string>(stringArray);
+
+type FirstElement<T> = (arr: T[]) => T;
+
+const firstElement: FirstElement<string> = (arr) => {
+  return arr[0];
 };
 
-type MyParam = <K>(param: K) => K;
+const firstElementNumber: FirstElement<number> = (arr) => {
+  return arr[0];
+};
+
+firstElement(['123']);
