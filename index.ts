@@ -12,8 +12,11 @@ class User {
   }
 }
 
-const user = new User('John', 'john@email.com');
-const user2 = new User('Mark', 'mark@email.com');
+const user: User = new User('John', 'john@email.com');
+const user2: User = new User('Mark', 'mark@email.com');
+
+user.lastname = 'last';
+user.name = 123;
 
 console.log(user);
 console.log(user.greet());
