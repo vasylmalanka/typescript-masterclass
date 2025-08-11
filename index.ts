@@ -14,16 +14,12 @@ class User {
   }
 }
 
-const user: User = new User('John', 'john@email.com');
-const user2: User = new User('Mark', 'mark@email.com');
-const user3: User = new User('Alice', 'alice@email.com', 'Doe');
+class Admin extends User {
+  isAdmin: boolean = true;
+}
 
-user.lastname = 'last';
-user.name = 123;
-user.email = 'new@email.com';
+const user: User = new User('John', 'john@email.com');
+const admin: Admin = new Admin('Mark', 'mark@email.com');
 
 console.log(user);
-console.log(user.greet());
-console.log(user2);
-console.log(user2.greet());
-console.log(user3);
+console.log(admin);
