@@ -1,15 +1,10 @@
 class User {
-  public name: string;
-  readonly email: string;
-  lastName?: string;
-  private phone: number;
-
-  constructor(name: string, email: string, phone: number, lastName?: string) {
-    this.name = name;
-    this.email = email;
-    this.lastName = lastName;
-    this.phone = phone;
-  }
+  constructor(
+    public name: string,
+    public readonly email: string,
+    private phone: number,
+    public lastName?: string
+  ) {}
 
   greet(): string {
     return `Hello ${this.name}`;
@@ -17,18 +12,16 @@ class User {
 }
 
 class Admin extends User {
-  isAdmin: boolean = true;
-  usersReporting: number;
+  public isAdmin: boolean = true;
 
   constructor(
     name: string,
     email: string,
     phone: number,
-    usersReporting: number,
+    public usersReporting: number,
     lastName?: string
   ) {
     super(name, email, phone, lastName);
-    this.usersReporting = usersReporting;
   }
 
   public greet(): string {
@@ -41,4 +34,3 @@ const admin: Admin = new Admin('John', 'John@email.com', 123456, 11);
 
 console.log(user.greet());
 console.log(admin.greet());
-
