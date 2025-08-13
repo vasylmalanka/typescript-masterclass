@@ -2,7 +2,7 @@ class User {
   public name: string;
   readonly email: string;
   lastName?: string;
-  protected phone: number;
+  private phone: number;
 
   constructor(name: string, email: string, phone: number, lastName?: string) {
     this.name = name;
@@ -13,6 +13,10 @@ class User {
 
   greet() {
     return `Hello ${this.name}`;
+  }
+
+  public printPhone() {
+    console.log(this.phone);
   }
 }
 
@@ -35,13 +39,13 @@ class Admin extends User {
     console.log(this.name);
   }
 
-  protected printPhone() {
-    console.log(this.phone);
-  }
+  // protected printPhone() {
+  //   console.log(this.phone);
+  // }
 
-  public useProtectedPhone() {
-    this.printPhone();
-  }
+  // public useProtectedPhone() {
+  //   this.printPhone();
+  // }
 }
 
 const user: User = new User('Mark', 'Mark@email.com', 123456);
@@ -52,5 +56,4 @@ admin.lastName = 'Doe';
 
 // console.log(user.phone);
 // console.log(admin.phone);
-console.log(admin.name);
-admin.useProtectedPhone();
+admin.printPhone();
