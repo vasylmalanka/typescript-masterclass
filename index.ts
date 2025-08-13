@@ -1,36 +1,14 @@
-class Person {
-  private _age?: number;
+class Counter {
+  static count = 0;
 
-  constructor(
-    public firstName: string,
-    public lastName: string,
-  ) {
-  }
-
-  public set age(age: number) {
-    if (age > 200 || age < 0) {
-      throw new Error('The age must be a within the age range 0-200');
-    }
-    this._age = age;
-  }
-
-  public get age() {
-    if (this._age === undefined) {
-      throw new Error('The age property is not defined');
-    }
-
-    return this._age;
-  }
-
-  public get fullname() {
-    return `${this.firstName} ${this.lastName}`;
+  static increment() {
+    Counter.count++;
   }
 }
 
-const john: Person = new Person('John', 'Doe');
-const mark: Person = new Person('Mark', 'Doe');
-john.age = 45;
-console.log(john.age);
+console.log(Counter.count);
+Counter.increment();
+console.log(Counter.count);
 
-console.log(john.fullname);
-console.log(mark.fullname);
+const counter: Counter = new Counter();
+counter.count;
