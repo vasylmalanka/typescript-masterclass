@@ -11,12 +11,8 @@ class User {
     this.phone = phone;
   }
 
-  greet() {
+  greet(): string {
     return `Hello ${this.name}`;
-  }
-
-  public printPhone() {
-    console.log(this.phone);
   }
 }
 
@@ -35,25 +31,14 @@ class Admin extends User {
     this.usersReporting = usersReporting;
   }
 
-  public printName() {
-    console.log(this.name);
+  public greet(): string {
+    return `Hello ${this.name}! I am the admin`;
   }
-
-  // protected printPhone() {
-  //   console.log(this.phone);
-  // }
-
-  // public useProtectedPhone() {
-  //   this.printPhone();
-  // }
 }
 
 const user: User = new User('Mark', 'Mark@email.com', 123456);
 const admin: Admin = new Admin('John', 'John@email.com', 123456, 11);
 
-user.name = 'Alice';
-admin.lastName = 'Doe';
+console.log(user.greet());
+console.log(admin.greet());
 
-// console.log(user.phone);
-// console.log(admin.phone);
-admin.printPhone();
