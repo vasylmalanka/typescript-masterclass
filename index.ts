@@ -1,36 +1,19 @@
-class User {
-  constructor(
-    public name: string,
-    public readonly email: string,
-    private phone: number,
-    public lastName?: string
-  ) {}
-
-  greet(): string {
-    return `Hello ${this.name}`;
-  }
-}
-
-class Admin extends User {
-  public isAdmin: boolean = true;
+class Person {
+  public fullname: string;
 
   constructor(
-    name: string,
-    email: string,
-    phone: number,
-    public usersReporting: number,
-    lastName?: string
+    public firstName: string,
+    public lastName: string,
+    public age: number,
   ) {
-    super(name, email, phone, lastName);
-  }
-
-  public greet(): string {
-    return `Hello ${this.name}! I am the admin`;
+    if (age > 200 || age < 0) {
+      throw new Error('The age must be a within the age range 0-200');
+    }
+    this.fullname = `${this.firstName} ${this.lastName}`;
   }
 }
 
-const user: User = new User('Mark', 'Mark@email.com', 123456);
-const admin: Admin = new Admin('John', 'John@email.com', 123456, 11);
+const john: Person = new Person('John', 'Doe', 45);
+const mark: Person = new Person('Mark', 'Doe', 20);
 
-console.log(user.greet());
-console.log(admin.greet());
+console.log(john.fullname);
