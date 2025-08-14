@@ -22,17 +22,23 @@ class Repository<T extends Identifiable> {
   }
 }
 
-type User = {
-  id: number;
+type User = Identifiable & {
   name: string;
   email: string;
 }
 
+type Book = Identifiable & {
+  title: string;
+  ISBN: number;
+}
+
 const usersRepository = new Repository<User>();
-usersRepository.add({
+const booksRepository = new Repository<Book>();
+
+booksRepository.add({
   id: 1,
-  name: 'John',
-  email: 'john@email.com',
+  title: 'Harry Potter',
+  ISBN: 1234567,
 });
 
-console.log(usersRepository.getById(1));
+console.log(booksRepository.getAll());
