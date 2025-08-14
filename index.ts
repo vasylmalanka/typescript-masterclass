@@ -1,44 +1,30 @@
-type Identifiable = {
-  id: number;
+type Constructor = new(...args: any[]) => {};
+
+function TimeStamp<T extends Constructor>(Base: T) {
+  return class extends Base {
+    protected timestamp: Date = new Date();
+
+    getTimestamp() {
+      return this.timestamp;
+    }
+  };
 }
 
-class Repository<T extends Identifiable> {
-  private items: T[] = [];
+class User {
+  constructor(public name: string) {}
+}
 
-  add(item: T) {
-    this.items.push(item);
+class UserWithTimestamp extends TimeStamp(User) {
+  constructor(name: string, public age: number) {
+    super(name);
   }
 
-  getById(id: number): T | undefined {
-    return this.items.find((item) => item.id === id);
-  }
-
-  getAll(): T[] {
-    return this.items;
-  }
-
-  removeById(id: number): void {
-    this.items = this.items.filter((item) => item.id !== id);
+  displayInfo() {
+    console.log(`Name: ${this.name}, Age: ${this.age}`);
+    console.log(`Timestamp: ${this.getTimestamp()}`);
   }
 }
 
-type User = Identifiable & {
-  name: string;
-  email: string;
-}
-
-type Book = Identifiable & {
-  title: string;
-  ISBN: number;
-}
-
-const usersRepository = new Repository<User>();
-const booksRepository = new Repository<Book>();
-
-booksRepository.add({
-  id: 1,
-  title: 'Harry Potter',
-  ISBN: 1234567,
-});
-
-console.log(booksRepository.getAll());
+const user: UserWithTimestamp = new UserWithTimestamp('Alice', 30);
+console.log(user);
+user.displayInfo();
