@@ -1,20 +1,38 @@
-class Box<T> {
-  private _value: T;
+type Identifiable = {
+  id: number;
+}
 
-  constructor(value: T) {
-    this._value = value;
+class Repository<T extends Identifiable> {
+  private items: T[] = [];
+
+  add(item: T) {
+    this.items.push(item);
   }
 
-  get value(): T {
-    return this._value;
+  getById(id: number): T | undefined {
+    return this.items.find((item) => item.id === id);
   }
 
-  set value(newValue: T) {
-    this._value = newValue;
+  getAll(): T[] {
+    return this.items;
+  }
+
+  removeById(id: number): void {
+    this.items = this.items.filter((item) => item.id !== id);
   }
 }
 
-const numberBox = new Box(123);
-numberBox.value = 'string';
+type User = {
+  id: number;
+  name: string;
+  email: string;
+}
 
-const stringBox = new Box<string>('Hello');
+const usersRepository = new Repository<User>();
+usersRepository.add({
+  id: 1,
+  name: 'John',
+  email: 'john@email.com',
+});
+
+console.log(usersRepository.getById(1));
