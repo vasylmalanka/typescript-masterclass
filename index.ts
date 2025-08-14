@@ -1,22 +1,20 @@
-function loadInitialCount(): number {
-  return 10;
-}
+class Box<T> {
+  private _value: T;
 
-class Counter {
-  static count = 0;
-
-  static increment() {
-    Counter.count++;
+  constructor(value: T) {
+    this._value = value;
   }
 
-  static {
-    console.log('initializing Counter Class');
-    Counter.count = loadInitialCount();
+  get value(): T {
+    return this._value;
+  }
+
+  set value(newValue: T) {
+    this._value = newValue;
   }
 }
 
-console.log(Counter.count);
-Counter.increment();
-console.log(Counter.count);
+const numberBox = new Box(123);
+numberBox.value = 'string';
 
-const counter: Counter = new Counter();
+const stringBox = new Box<string>('Hello');
