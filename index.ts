@@ -14,6 +14,19 @@ abstract class Department {
       }
     }
   }
+
+  public printHolidays() {
+    if (this.holidays.length === 0) {
+      console.log('There are no holidays');
+    }
+    console.log('Here is the list of holidays');
+
+    this.holidays.forEach((holiday, index) => {
+      console.log(
+        `${index + 1}. ${holiday.reason}, ${holiday.date}`
+      );
+    });
+  }
 }
 
 class ItDepartment extends Department {
@@ -60,5 +73,5 @@ const adminDepartment: AdminDepartment = new AdminDepartment();
 itDepartment.addHolidays(itHolidays);
 adminDepartment.addHolidays(adminHolidays);
 
-console.log(itDepartment);
-console.log(adminDepartment);
+itDepartment.printHolidays();
+adminDepartment.printHolidays();
