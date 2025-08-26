@@ -18,8 +18,16 @@ abstract class Department {
 
 class ItDepartment extends Department {
   protected holidays: Holidays = [];
+
+  constructor() {
+    super('IT Department');
+  }
 }
 
 class AdminDepartment extends Department {
   protected holidays: Holidays = [];
+
+  constructor() {
+    super('Admin Department');
+  }
 }
