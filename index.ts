@@ -1,13 +1,28 @@
-interface Person {
+interface User {
   name: string;
   email: string;
-  age: number;
-  phone?: number;
-  greet?: () => void;
+  phone: number;
+  gender: string;
 }
 
-const person: Person = {
+interface UserWithAddress extends User {
+  address: string;
+}
+
+const user: User = {
   name: 'john',
   email: 'john@email.com',
-  age: 32,
+  phone: 9876543,
+  gender: 'male',
 };
+
+const userWithAddress: UserWithAddress = {
+  name: 'john',
+  email: 'john@email.com',
+  phone: 9876543,
+  gender: 'male',
+  address: 'This is an address',
+};
+
+console.log(user);
+console.log(userWithAddress);
