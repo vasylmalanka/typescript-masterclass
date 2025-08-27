@@ -1,35 +1,32 @@
-type User = {
-  name: string;
+abstract class Person {
+  public abstract name: string;
+  public abstract email: string;
+  public abstract phone: number;
+
+  public greeting() {
+    console.log(`Hello ${this.name}`);
+  }
+
+  public static nameClass() {
+    return 'Class name is Person';
+  }
 }
 
-type AdminUser = {
-  isAdmin: boolean;
+class RegistredPerson extends Person {
+  constructor(
+    public name: string,
+    public email: string,
+    public phone: number,
+  ) {
+    super();
+  }
 }
 
-// Intersection Type
-const userAndAdmin: User & AdminUser = {
-  name: 'John',
-  isAdmin: true,
-};
+const person: RegistredPerson = new RegistredPerson(
+  'John',
+  'john@email.com',
+  988768787,
+);
 
-// Union type
-const userOrAdmin: User | AdminUser = {
-  name: 'Mark',
-};
-
-// Tuples
-type ResponseTuple = [string, number];
-
-interface Name {
-  name: string;
-}
-
-interface LastName {
-  lastName: string;
-}
-
-class Person implements Name, LastName {
-  constructor(public name: string, public lastName: string) {}
-}
-
-const person: Person = new Person('John', 'Doe');
+console.log(person);
+console.log(Person.nameClass());
