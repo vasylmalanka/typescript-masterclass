@@ -1,63 +1,12 @@
-enum AutomobileTypes {
-  car = 'car',
-  bus = 'bus',
-  van = 'van',
-  truck = 'truck',
-  bike = 'bike',
+interface IUser {
+  id: number;
+  name: string;
 }
 
-enum AutomobileBrands {
-  ferrari = 'ferrari',
-  honda = 'honda',
-  bmw = 'bmw',
-  toyota = 'toyota',
+interface IUser {
+  passwordHash: string;
 }
 
-enum AutomobileColors {
-  red = 'red',
-  blue = 'blue',
-  white = 'white',
-  black = 'black',
-  silver = 'silver',
+class User implements IUser {
+  constructor(public id: number, public name: string) {}
 }
-
-interface Automobile<Type, Brand, Colors> {
-  type: Type;
-  brand: Brand;
-  colors: Colors[];
-  description: string;
-}
-
-interface CommercialVehicle {
-  capacity: string;
-  licenseRenewalDate: Date;
-}
-
-class Truck
-  implements Automobile< string, AutomobileBrands, AutomobileColors>,
-  CommercialVehicle
-{
-  public type: string = 'truck';
-
-  constructor(
-    public brand: AutomobileBrands,
-    public colors: AutomobileColors[],
-    public description: string,
-    public capacity: string,
-    public licenseRenewalDate: Date,
-    private driverName: string = 'John',
-  ) {}
-}
-
-const toyotaTruck: Truck = new Truck(
-  AutomobileBrands.toyota,
-  [
-    AutomobileColors.black,
-    AutomobileColors.silver,
-  ],
-  'This is a Toyota truck',
-  '15 Tonnes',
-  new Date(),
-);
-
-console.log(toyotaTruck);
