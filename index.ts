@@ -28,42 +28,25 @@ interface Automobile<Type, Brand, Colors> {
   description: string;
 }
 
-class Car implements Automobile<
-  string,
-  AutomobileBrands,
-  AutomobileColors
-> {
-  public type: string = 'car';
-
-  constructor(
-    public brand: AutomobileBrands,
-    public colors: AutomobileColors[],
-    public description: string,
-  ) {}
+interface CommercialVehicle {
+  capacity: string;
+  licenseRenewalDate: Date;
 }
 
-class Truck implements Automobile<
-  string,
-  AutomobileBrands,
-  AutomobileColors
-> {
+class Truck
+  implements Automobile< string, AutomobileBrands, AutomobileColors>,
+  CommercialVehicle
+{
   public type: string = 'truck';
 
   constructor(
     public brand: AutomobileBrands,
     public colors: AutomobileColors[],
     public description: string,
+    public capacity: string,
+    public licenseRenewalDate: Date,
   ) {}
 }
-
-const ferrari: Car = new Car(
-  AutomobileBrands.ferrari,
-  [
-    AutomobileColors.red,
-    AutomobileColors.black,
-  ],
-  'This is a Ferrari',
-);
 
 const toyotaTruck: Truck = new Truck(
   AutomobileBrands.toyota,
@@ -72,7 +55,8 @@ const toyotaTruck: Truck = new Truck(
     AutomobileColors.silver,
   ],
   'This is a Toyota truck',
+  '15 Tonnes',
+  new Date(),
 );
 
-console.log(ferrari);
 console.log(toyotaTruck);
