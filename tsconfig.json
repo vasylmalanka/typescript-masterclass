@@ -1,4 +1,6 @@
 {
+  "exclude": ["app2.ts", "node_modules", "*.exclude.ts", "**/*.exclude.ts"],
+  "include": ["src"],
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
