@@ -1,18 +1,18 @@
-const book = new Object();
+function User(name, email) {
+  this.name = name;
+  this.email = email;
+  this.points = 0;
+}
 
-Object.defineProperty(book, 'title', {
-  value: 'This is the title of the book',
-  writable: true,
-  enumerable: true,
-  configurable: true,
-});
-Object.defineProperty(book, 'author', {
-  value: 'John',
-  writable: false,
-  enumerable: true,
-  configurable: true,
-});
+User.prototype.login = function () {
+  console.log(this.name, 'Has logged in');
+};
 
-book.author = 'Mark';
+User.prototype.logout = function () {
+  console.log(this.name, 'Has logged out');
+};
 
-console.log(book);
+User.prototype.addPoint = function () {
+  this.points++;
+  console.log('total points', this.points);
+};
