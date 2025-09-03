@@ -1,19 +1,18 @@
 function methodLogger(target: any, context: any) {
-    console.log(target);
-    console.log(context);
+  function replaceMethod(this: any, ...args: any[]) {
+    const result = target.call(this, args);
+  }
+  return replaceMethod;
 }
 
-function classDecorator(target: any, context: any) {
-    console.log(target);
-    console.log(context);
-}
-
-@classDecorator
 class Person {
-    constructor(public name: string) {}
+  constructor(public name: string) {}
 
-    @methodLogger
-    greet() {
-        console.log(`Hello my name is ${this.name}`);
-    }
+  @methodLogger
+  greet(greeting: string) {
+    console.log(`${greeting}, ${this.name}`);
+  }
 }
+
+let user: Person = new Person('John');
+user.greet('Hello');
