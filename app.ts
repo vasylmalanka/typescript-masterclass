@@ -1,4 +1,11 @@
-function methodLogger(target: any, context: any) {
+function methodLogger(target: any, _context: any) {
+  function replaceMethod(this: any, ...args: any[]) {
+    target.call(this, args);
+  }
+  return replaceMethod;
+}
+
+function bound(_target: any, context: any) {
   const methodName = context.name;
 
   if (context.private) {
@@ -6,19 +13,14 @@ function methodLogger(target: any, context: any) {
   }
 
   context.addInitializer(function (this: any) {
-    console.log(this);
     this[methodName] = this[methodName].bind(this);
   });
-
-  function replaceMethod(this: any, ...args: any[]) {
-    target.call(this, args);
-  }
-  return replaceMethod;
 }
 
 class Person {
   constructor(public name: string) {}
 
+  @bound
   @methodLogger
   greet(greeting: string) {
     console.log(`${greeting}, ${this.name}`);
