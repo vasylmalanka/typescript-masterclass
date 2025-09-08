@@ -1,8 +1,11 @@
-function methodLogger(target: any, _context: any) {
-  function replaceMethod(this: any, ...args: any[]) {
-    target.call(this, args);
+function methodLogger(logPrefix: string) {
+  return function (target: any, _context: any) {
+    return function (this: any, ...args: any[]) {
+      console.log(`${logPrefix} Inovocation Started`);
+      target.call(this, args);
+      console.log(`${logPrefix} Inovocation Ended`);
+    }
   }
-  return replaceMethod;
 }
 
 function bound(_target: any, context: any) {
@@ -21,7 +24,7 @@ class Person {
   constructor(public name: string) {}
 
   @bound
-  @methodLogger
+  @methodLogger('LOG: ')
   greet(greeting: string) {
     console.log(`${greeting}, ${this.name}`);
   }
