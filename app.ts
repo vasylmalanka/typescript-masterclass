@@ -1,15 +1,21 @@
-function methodLogger(logPrefix: string) {
-  return function (target: any, _context: any) {
-    return function (this: any, ...args: any[]) {
+function methodLogger<This, Args extends any[], Return>(logPrefix: string) {
+  return function (
+    target: (this: This, ...args: Args) => Return,
+    _context: ClassMethodDecoratorContext<
+      This,
+      (this: This, ...args: Args) => Return
+    >
+  ) {
+    return function (this: This, ...args: Args) {
       console.log(`${logPrefix} Inovocation Started`);
-      target.call(this, args);
+      target.call(this, ...args);
       console.log(`${logPrefix} Inovocation Ended`);
     }
   }
 }
 
-function bound(_target: any, context: any) {
-  const methodName = context.name;
+function bound(_target: Function, context: ClassMethodDecoratorContext) {
+  const methodName = String(context.name);
 
   if (context.private) {
     throw new Error('Cannot decorate private property');
@@ -24,8 +30,8 @@ class Person {
   constructor(public name: string) {}
 
   @bound
-  @methodLogger('LOG: ')
-  greet(greeting: string) {
+  @methodLogger<Person, [string], void>('LOG: ')
+  greet(greeting: string): void {
     console.log(`${greeting}, ${this.name}`);
   }
 }
