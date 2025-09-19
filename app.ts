@@ -1,31 +1,28 @@
-function addDefaultPost<This, Value extends Post[]>(
-  _target: undefined,
-  _context: ClassFieldDecoratorContext<This, Value>
+function addGreetMethod<T extends new (...args: any[]) => any>(
+  target: T,
+  _context: ClassDecoratorContext<T>
 ) {
-  return function (initialValue: Value) {
-    initialValue.push({
-      title: 'Default Title',
-      content: 'Default Content',
-    });
-    return initialValue;
-  }
+  return class extends target {
+    constructor(...args: any[]) {
+      super(...args);
+      this.greet = (greeting: string) => {
+        console.log(`${greeting}, ${this.name}! Have a great day!`);
+      }
+    }
+  };
 }
 
-type Post = {
-  title: string;
-  content: string;
-}
-
-class Author {
-  @(addDefaultPost<Author, Post[]>)
-  public posts: Post[] = [];
-
+class Greetable {
   constructor(public name: string) {}
+  greet: (greeting: string) => void = () => {};
+}
 
-  greet(greeting: string): void {
-    console.log(`${greeting}, ${this.name}`);
+@addGreetMethod
+class Author extends Greetable {
+  constructor(public name: string) {
+    super(name);
   }
 }
 
 const author = new Author('Mark');
-console.log(author.posts);
+author.greet('Hello');
