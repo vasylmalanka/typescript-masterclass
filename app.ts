@@ -1,28 +1,27 @@
-function addGreetMethod<T extends new (...args: any[]) => any>(
-  target: T,
-  _context: ClassDecoratorContext<T>
-) {
-  return class extends target {
-    constructor(...args: any[]) {
-      super(...args);
-      this.greet = (greeting: string) => {
-        console.log(`${greeting}, ${this.name}! Have a great day!`);
-      }
-    }
-  };
+function getter(target: any, context: ClassGetterDecoratorContext) {
+  console.log(target);
+  console.log(context);
 }
 
-class Greetable {
-  constructor(public name: string) {}
-  greet: (greeting: string) => void = () => {};
+function setter(target: any, context: ClassSetterDecoratorContext) {
+  console.log(target);
+  console.log(context);
 }
 
-@addGreetMethod
-class Author extends Greetable {
-  constructor(public name: string) {
-    super(name);
+class Person {
+  constructor(public name: string, private _age: number = 10) {}
+
+  greet() {
+    console.log(`Hello ${this.name}`);
+  }
+
+  @getter
+  public get age() {
+    return this._age;
+  }
+
+  @setter
+  public set age(value) {
+    this._age = value;
   }
 }
-
-const author = new Author('Mark');
-author.greet('Hello');
