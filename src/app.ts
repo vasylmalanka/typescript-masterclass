@@ -1,16 +1,16 @@
-function FirstDecorator(_target: Function) {
-  console.log('Decorator Invoked');
-  console.log(_target);
+function FirstDecorator(name: string) {
+  return function (target: Function) {
+    console.log(`${name} Invoked`);
+    console.log(target);
+  }
 }
 
-@FirstDecorator
+@FirstDecorator('First Decorator')
 class Aircraft {
   constructor(
     public _aircraftModel: string,
     private pilot: string
-  ) {
-    console.log('Aircraft Class Instantiated');
-  }
+  ) {}
 
   public pilotName() {
     console.log(this.pilot);
