@@ -8,7 +8,9 @@ class Aircraft {
   constructor(
     public _aircraftModel: string,
     private pilot: string
-  ) {}
+  ) {
+    console.log('Aircraft Class Instantiated');
+  }
 
   public pilotName() {
     console.log(this.pilot);
@@ -19,4 +21,4 @@ class Aircraft {
   }
 }
 
-new Aircraft('Boeing', 'Max');
+new Aircraft('Airbus A380', 'John');
