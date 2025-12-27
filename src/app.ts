@@ -9,6 +9,8 @@ interface AircarfatInterface {
   origin?: string;
   manufacturer?: string;
   type?: string;
+  airbusMethod?: () => void;
+  boeingMethod?: () => void;
 }
 
 function AircraftManufacturer(manufacturer: Manufacturers) {
@@ -17,10 +19,16 @@ function AircraftManufacturer(manufacturer: Manufacturers) {
       target.prototype.origin = 'United States of America';
       target.prototype.manufacturer = Manufacturers.airbus;
       target.prototype.type = 'Jet';
+      target.prototype.airbusMethod = () => {
+        console.log('Function performed by airbus')
+      }
     } else {
       target.prototype.origin = 'France';
       target.prototype.manufacturer = Manufacturers.boeing;
       target.prototype.type = 'Helicopter';
+      target.prototype.boeingMethod = () => {
+        console.log('Function performed by boeing')
+      }
     }
   }
 }
@@ -44,3 +52,7 @@ class Airplane implements AircarfatInterface {
 const airplane: AircarfatInterface = new Airplane('Airbus A380', 'John');
 
 console.log(airplane.manufacturer);
+
+airplane.airbusMethod
+  ? airplane.airbusMethod()
+  : console.log('Method Does' + ' not Exist');
