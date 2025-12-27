@@ -3,6 +3,14 @@ enum Manufacturers {
   airbus = 'airbus',
 }
 
+interface AircarfatInterface {
+  _aircraftModel: string;
+  prototype?: any;
+  origin?: string;
+  manufacturer?: string;
+  type?: string;
+}
+
 function AircraftManufacturer(manufacturer: Manufacturers) {
   return (target: Function) => {
     if (manufacturer === Manufacturers.airbus) {
@@ -18,7 +26,7 @@ function AircraftManufacturer(manufacturer: Manufacturers) {
 }
 
 @AircraftManufacturer(Manufacturers.airbus)
-class Airplane {
+class Airplane implements AircarfatInterface {
   constructor(
     public _aircraftModel: string,
     private pilot: string
@@ -33,6 +41,6 @@ class Airplane {
   }
 }
 
-const airplane = new Airplane('Airbus A380', 'John');
-//@ts-ignore
+const airplane: AircarfatInterface = new Airplane('Airbus A380', 'John');
+
 console.log(airplane.manufacturer);
