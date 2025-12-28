@@ -49,9 +49,27 @@ class Airplane implements AircarfatInterface {
   }
 }
 
-const airplane: AircarfatInterface = new Airplane('Airbus A380', 'John');
+@AircraftManufacturer(Manufacturers.boeing)
+class Helicopter implements AircarfatInterface {
+  constructor(
+    public _aircraftModel: string,
+    private pilot: string
+  ) {}
 
-console.log(airplane.manufacturer);
+  public pilotName() {
+    console.log(this.pilot);
+  }
+
+  public get aircraftModel() {
+    return this._aircraftModel;
+  }
+}
+
+const airplane: AircarfatInterface = new Airplane('Airbus A380', 'John');
+const helicopter: AircarfatInterface = new Helicopter('H380', 'Mark');
+
+console.log(airplane);
+console.log(helicopter);
 
 airplane.airbusMethod
   ? airplane.airbusMethod()
