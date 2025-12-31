@@ -1,40 +1,27 @@
-function PropertyDecorator(
-  classPrototype: Object,
-  properyName: string,
-) {
-  console.log(classPrototype, properyName);
+interface MapLocation {
+  lat: number;
+  long: number;
 }
 
-function AccessorDecorator(
-  classPrototype: Object,
-  accessorName: string,
-  propertyDescriptor: PropertyDescriptor,
-) {
-  console.log(classPrototype, accessorName, propertyDescriptor);
+function AddLocation (lat: number, long: number) {
+  return <T extends {new (...args: any[]): {}}>(classConstructor: T) => {
+    return class extends classConstructor {
+      public mapLocation: MapLocation;
+      constructor(...args: any[]) {
+        super(...args);
+        this.mapLocation = { lat, long, };
+      }
+    }
+  }
 }
 
-class Airplane {
-    @PropertyDecorator
-    public _aircraftModel: string;
-
+@AddLocation(1.2345, 1.876)
+class Person {
   constructor(
-    aircraftModel: string,
-  ) {
-    this._aircraftModel = aircraftModel;
-  }
-
-  public static seatCount(): void {
-    console.log('150 seats');
-  }
-
-  public pilotName(name: string, _lastName: string) {
-    console.log(name);
-  }
-
-  @AccessorDecorator
-  public get aircraftModel() {
-    return this._aircraftModel;
-  }
+    public name: string,
+    public age: number,
+  ) {}
 }
 
-const airplane = new Airplane('Airbus A380');
+const person: Person = new Person('John', 32);
+console.log(person);
