@@ -1,24 +1,37 @@
-function ParameterDecorator(
+function PropertyDecorator(
   classPrototype: Object,
-  methodName: string,
-  index: number,
+  properyName: string,
 ) {
-  console.log(classPrototype, methodName, index);
+  console.log(classPrototype, properyName);
+}
+
+function AccessorDecorator(
+  classPrototype: Object,
+  accessorName: string,
+  propertyDescriptor: PropertyDescriptor,
+) {
+  console.log(classPrototype, accessorName, propertyDescriptor);
 }
 
 class Airplane {
+    @PropertyDecorator
+    public _aircraftModel: string;
+
   constructor(
-    public _aircraftModel: string,
-  ) {}
+    aircraftModel: string,
+  ) {
+    this._aircraftModel = aircraftModel;
+  }
 
   public static seatCount(): void {
     console.log('150 seats');
   }
 
-  public pilotName(name: string, @ParameterDecorator _lastName: string) {
+  public pilotName(name: string, _lastName: string) {
     console.log(name);
   }
 
+  @AccessorDecorator
   public get aircraftModel() {
     return this._aircraftModel;
   }
