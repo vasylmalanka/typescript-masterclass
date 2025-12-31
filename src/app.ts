@@ -1,27 +1,19 @@
-interface MapLocation {
-  lat: number;
-  long: number;
+function first() {
+  console.log("first(): factory evaluated");
+  return function (_target: any, _propertyKey: string, _descriptor: PropertyDescriptor) {
+    console.log("first(): called");
+  };
 }
 
-function AddLocation (lat: number, long: number) {
-  return <T extends {new (...args: any[]): {}}>(classConstructor: T) => {
-    return class extends classConstructor {
-      public mapLocation: MapLocation;
-      constructor(...args: any[]) {
-        super(...args);
-        this.mapLocation = { lat, long, };
-      }
-    }
-  }
+function second() {
+  console.log("second(): factory evaluated");
+  return function (_target: any, _propertyKey: string, _descriptor: PropertyDescriptor) {
+    console.log("second(): called");
+  };
 }
 
-@AddLocation(1.2345, 1.876)
-class Person {
-  constructor(
-    public name: string,
-    public age: number,
-  ) {}
+class ExampleClass {
+  @first()
+  @second()
+  method() {}
 }
-
-const person: Person = new Person('John', 32);
-console.log(person);
