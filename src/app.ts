@@ -1,43 +1,54 @@
-type Person = {
+let value: unknown = 'Hello, TypeScript';
+
+let str: number = value as number;
+
+type User = {
   name: string;
   age: number;
 };
 
-type Employee = Person & {
-  employeeId: number;
-  department: string;
+const user = {
+  name: 'Alice',
+  age: 30,
+  isAdmin: true,
+}
+const newUser: User = user;
+
+function printUser (user: User) {
+  console.log(user);
+}
+printUser(newUser);
+printUser({
+  name: 'Alice',
+  age: 30,
+  isAdmin: true,
+});
+
+type Animal = {
+  name: string;
 };
 
-type Studen = Person & {
-  studenId: number;
-  major: string;
+type Dog = Animal & {
+  breed: string;
 };
 
-function greet(person: Person): string {
-  return `Hello ${person.name}! You are ${person.age}`;
+let handleAnimal = (animal: Animal) => {
+  console.log(`Handling ${animal.name}`);
 }
 
-const employee: Employee = {
-  name: 'Alice',
-  age: 30,
-  employeeId: 101,
-  department: 'Engineering',
-};
+let handleDog: (dog: Dog) => void = handleAnimal;
+handleDog({name: 'Buddy', breed: 'Labrador'});
 
-const student: Studen = {
-  name: 'Bob',
-  age: 22,
-  studenId: 101,
-  major: 'Computer Science',
-};
+function logNumbers(...numbers: number[]) {
+  console.log(numbers);
+}
 
-console.log(greet(employee));
-console.log(greet(student));
+logNumbers();
 
-console.log(greet({
-  name: 'Alice',
-  age: 30,
-  employeeId: 101,
-  department: 'Engineering',
-}));
-// Object literal may only specify known properties, and 'employeeId' does not exist in type 'Person'.
+function runFunction(func: () => void) {
+  func();
+}
+
+const getPI = () => 3.14;
+
+runFunction(getPI);
