@@ -1,54 +1,40 @@
-let value: unknown = 'Hello, TypeScript';
+interface Ball {
+  diameter: number;
+}
 
-let str: number = value as number;
+interface Sphere {
+  diameter: number;
+}
 
-type User = {
-  name: string;
-  age: number;
+let ball: Ball = { diameter: 10 };
+let sphere: Sphere = { diameter: 20 };
+
+sphere = ball;
+ball = sphere;
+
+interface Tube {
+  diameter: number;
+  length: number;
+}
+
+let tube: Tube = {
+  diameter: 12,
+  length: 3,
+}
+
+ball = tube;
+// tube = ball;
+
+type ValidatedInputString = string & { __brand: 'Validated Input' };
+
+const validateUserInput = (input: string) => {
+  const simpleValidatedInput = input.trim();
+  return simpleValidatedInput as ValidatedInputString;
 };
 
-const user = {
-  name: 'Alice',
-  age: 30,
-  isAdmin: true,
-}
-const newUser: User = user;
-
-function printUser (user: User) {
-  console.log(user);
-}
-printUser(newUser);
-printUser({
-  name: 'Alice',
-  age: 30,
-  isAdmin: true,
-});
-
-type Animal = {
-  name: string;
-};
-
-type Dog = Animal & {
-  breed: string;
-};
-
-let handleAnimal = (animal: Animal) => {
-  console.log(`Handling ${animal.name}`);
+const printName = (name: ValidatedInputString) => {
+  console.log(name);
 }
 
-let handleDog: (dog: Dog) => void = handleAnimal;
-handleDog({name: 'Buddy', breed: 'Labrador'});
-
-function logNumbers(...numbers: number[]) {
-  console.log(numbers);
-}
-
-logNumbers();
-
-function runFunction(func: () => void) {
-  func();
-}
-
-const getPI = () => 3.14;
-
-runFunction(getPI);
+printName(validateUserInput('John'));
+printName('Mark');
