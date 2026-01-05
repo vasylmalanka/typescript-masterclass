@@ -1,9 +1,7 @@
-const welcomeString = 'Hello There';
-let replyString = 'Hey';
+function getLength (value: string | number): number {
+  if (typeof value === 'string') {
+    return value.length;
+  }
 
-let unionString: string | undefined;
-unionString.length;
-
-if (unionString) {
-  unionString.length;
+  return value.toString().length;
 }
