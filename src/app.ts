@@ -1,8 +1,7 @@
-// Mapped Types
-// Partial Type Implementation
-type PartialType<T> = {
-  [P in keyof T]?: T[P];
-};
-// Conditional Types
-// Exclude Type Implementation
-type ExcludeType<T, U> = T extends U ? never : T;
+const promise: Promise<number> = new Promise ((res, _rej) => {
+  setTimeout(() => {
+    res(1);
+  }, 1000);
+});
+
+type AwaitedType = Awaited<typeof promise>;
