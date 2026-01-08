@@ -1,14 +1,8 @@
-interface Person {
+interface User {
   name: string;
   age: number;
-  address: string;
-}
+  email: string;
+  password: string;
+};
 
-type NameAge = Readonly<Pick<Person, 'name' | 'age'>>;
-
-const person: NameAge = {
-  name: 'John',
-  age: 32,
-}
-
-person.name = 'Else';
+type LimitedUser = Omit<User, 'password' | 'age'>;
