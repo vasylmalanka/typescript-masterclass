@@ -1,23 +1,14 @@
-type Roles = 'author' | 'editor' | 'researcher';
-
-interface User {
+interface Person {
   name: string;
-  email: string;
   age: number;
-};
-
-interface Article {
-  title: string;
-  content: string;
-  contributors: Record<Roles, User>;
+  address: string;
 }
 
-const article: Article = {
-  title: 'Lorem',
-  content: 'Duis',
-  contributors: {
-    author: { name: 'John', email: 'john@email.com', age: 32 },
-    editor: { name: 'Frank', email: 'frank@email.com', age: 36 },
-    researcher: { name: 'Mark', email: 'mark@email.com', age: 36 },
-  },
-};
+type NameAge = Readonly<Pick<Person, 'name' | 'age'>>;
+
+const person: NameAge = {
+  name: 'John',
+  age: 32,
+}
+
+person.name = 'Else';
