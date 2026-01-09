@@ -1,8 +1,18 @@
 interface User {
   name: string;
-  age: number;
   email: string;
   password: string;
+}
+
+function updateUser(user: User, updates: Partial<User>): User {
+  return {...user, ...updates};
+}
+
+const user: User = {
+  name: 'John',
+  email: 'john@site.com',
+  password: 'password',
 };
 
-type LimitedUser = Omit<User, 'password' | 'age'>;
+const updatedUser = updateUser(user, { email: 'john@email.com' });
+console.log(updatedUser);
