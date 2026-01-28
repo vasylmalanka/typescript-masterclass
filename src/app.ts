@@ -1,16 +1,25 @@
-type Properties = 'red' | 'green' | 'blue';
-type RGB = [red: number, green: number, blue: number];
+interface Box<Type> {
+  content: Type;
+  size: number;
+}
 
-const color = {
-  red: [255, 0, 0],
-  green: '#00ff00',
-  blue: [255, 255, 0],
-} satisfies Record<Properties, RGB | string>;
+const stringBox: Box<string> = {
+  content: 'Hello, TypeScript',
+  size: 10
+};
 
-const redComponent = color.red[0]; // 255
+const numberBox: Box<number> = {
+  content: 42,
+  size: 10
+};
 
-const greenValue = color.green.toUpperCase();
-// '#00FF00'
+interface LengthWise {
+  length: number;
+}
 
-const blueValue = color.blue.toUpperCase();
-// Property 'toUpperCase' does not exist on type '[number, number, number]'.
+function logLength<T extends LengthWise>(arg: T): void {
+  console.log(arg.length);
+}
+
+logLength('Hello');
+logLength({length: 10, value: 65});
