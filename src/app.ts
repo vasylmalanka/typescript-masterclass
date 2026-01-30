@@ -1,25 +1,23 @@
-interface Box<Type> {
-  content: Type;
-  size: number;
-}
-
-const stringBox: Box<string> = {
-  content: 'Hello, TypeScript',
-  size: 10
+type User = {
+  id: number;
+  name: string;
+  age: number;
 };
 
-const numberBox: Box<number> = {
-  content: 42,
-  size: 10
+type UserKeys = keyof User;
+let key: UserKeys;
+key = 'id';
+key = 'name';
+key = 'age';
+
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+  return obj[key];
+}
+
+const user: User = {
+  id: 1,
+  name: 'Alice',
+  age: 30
 };
-
-interface LengthWise {
-  length: number;
-}
-
-function logLength<T extends LengthWise>(arg: T): void {
-  console.log(arg.length);
-}
-
-logLength('Hello');
-logLength({length: 10, value: 65});
+console.log(getProperty(user, 'name'));
+console.log(getProperty(user, 'age'));
