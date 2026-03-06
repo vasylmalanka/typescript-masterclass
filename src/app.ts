@@ -1,23 +1,15 @@
-const user = {
-    id: 1,
-    name: 'Alice',
-    age: 30,
+type User = {
+    id: number;
+    name: string;
+    age: number;
 };
 
-type UserType = typeof user;
+type UserNameType = User['name'];
+type UserIDType = User['id'];
 
-const newUser: UserType = {
-    id: 2,
-    name: 'Bob',
-    age: 32,
-};
-
-function getUser() {
-    return {
-        id: 1,
-        name: 'Alice',
-        age: 30,
-    };
+function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
+    return obj[key];
 }
+const userData: User = { id: 1, name: 'Bob', age: 25 };
 
-type ReturnUserType = ReturnType<typeof getUser>;
+const userName: User['name'] = getProperty(userData, 'name');
