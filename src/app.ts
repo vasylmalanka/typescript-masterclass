@@ -1,19 +1,37 @@
-type Circle = {
-  kind: 'circle';
-  radius: number;
-};
+abstract class Product {
+  constructor(public name: string, public price: number) {}
 
-type Square = {
-  kind: 'square';
-  sideLength: number;
+  abstract getPrice(): number;
 }
 
-type Shape = Circle | Square;
+class Electronics extends Product {
+  constructor(name: string, price: number, public warranty: number) {
+    super(name, price);
+  }
 
-function getArea (shape: Shape) {
-  if ('radius' in shape) {
-    return Math.PI * shape.radius ** 2;
-  } else {
-    return shape.sideLength ** 2;
+  getPrice(): number {
+    return this.price;
+  }
+}
+
+class Clothing extends Product {
+  constructor(name: string, price: number, public size: string, public material: string) {
+    super(name, price);
+  }
+
+  getPrice(): number {
+    return this.price;
+  }
+}
+
+function displayDetails(product: Product): void {
+  console.log(`Name: ${product.name}`);
+  console.log(`Price: ${product.price}`);
+
+  if (product instanceof Electronics) {
+    console.log(`Warranty: ${product.warranty}`);
+  } else if (product instanceof Clothing) {
+    console.log(`Size: ${product.size}`);
+    console.log(`Material: ${product.material}`);
   }
 }
