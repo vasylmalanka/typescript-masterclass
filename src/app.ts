@@ -1,16 +1,7 @@
-type IsString<T> = T extends string ? 'Yes' : 'No';
+type Status = 'success' | 'error' | 'pending';
+type StatusMessage = `status-${Status}`;
 
-type Test1 = IsString<string>;
-type Test2 = IsString<number>;
+type RGB = `rgb(${number}, ${number}, ${number})`; // rgb(255, 0, 0)
 
-type OptionIfString<T> = {
-    [K in keyof T]: T[K] extends string ? T[K] | undefined : T[K];
-};
-
-type User = {
-    id: number;
-    name: string;
-    age: number;
-};
-
-type OptionalNameUser = OptionIfString<User>;
+const color1: RGB = 'rgb(255, 45, 43)';
+const color2: RGB = 'rgb(255, 45, 43, 56)';
