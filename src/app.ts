@@ -1,7 +1,11 @@
-type Status = 'success' | 'error' | 'pending';
-type StatusMessage = `status-${Status}`;
-
-type RGB = `rgb(${number}, ${number}, ${number})`; // rgb(255, 0, 0)
-
-const color1: RGB = 'rgb(255, 45, 43)';
-const color2: RGB = 'rgb(255, 45, 43, 56)';
+function printStrings(str: string | string[] | null) {
+    if (str && typeof str === 'object') {
+        for (const s of str) {
+            console.log(s);
+        }
+    } else if (str === 'string') {
+        console.log(str);
+    } else {
+        console.log('Pass an array of strings or a string as an argument');
+    }
+}
