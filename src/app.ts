@@ -1,37 +1,25 @@
-abstract class Product {
-  constructor(public name: string, public price: number) {}
-
-  abstract getPrice(): number;
-}
-
-class Electronics extends Product {
-  constructor(name: string, price: number, public warranty: number) {
-    super(name, price);
+namespace MathUtils {
+  export function add(a: number, b: number) {
+    return a + b;
   }
 
-  getPrice(): number {
-    return this.price;
+  export function subtract(a: number, b: number) {
+    return a - b;
   }
 }
 
-class Clothing extends Product {
-  constructor(name: string, price: number, public size: string, public material: string) {
-    super(name, price);
+namespace StringUtils {
+  export function add(a: string, b: string) {
+    return a + b;
   }
 
-  getPrice(): number {
-    return this.price;
-  }
-}
-
-function displayDetails(product: Product): void {
-  console.log(`Name: ${product.name}`);
-  console.log(`Price: ${product.price}`);
-
-  if (product instanceof Electronics) {
-    console.log(`Warranty: ${product.warranty}`);
-  } else if (product instanceof Clothing) {
-    console.log(`Size: ${product.size}`);
-    console.log(`Material: ${product.material}`);
+  export function subtract(a: string, b: string) {
+    return a.replace(b, '');
   }
 }
+
+let sum = MathUtils.add(5, 2);
+let combined = StringUtils.add('Hello ', 'World');
+
+console.log(sum);
+console.log(combined);
