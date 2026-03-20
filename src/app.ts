@@ -1,5 +1,3 @@
-import { add } from './functions/math';
-const printHello = require('./functions/strings');
+import { add } from './calculator.js';
 
-printHello();
-console.log(add(5, 2));
+console.log(add(1, 12));

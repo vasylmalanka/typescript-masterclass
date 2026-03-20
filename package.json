@@ -1,7 +1,7 @@
 {
   "name": "typescript-masterclass",
   "version": "1.0.0",
-  "type": "nodenext",
+  "type": "module",
   "description": "",
   "main": "index.ts",
   "scripts": {
