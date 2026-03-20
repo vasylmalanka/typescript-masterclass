@@ -1,12 +1,16 @@
-///<reference path="common-utils.ts" />
+import AddOutput from "./AddOutput.interface.js";
+import { CommonUtils } from "./common-utils.js";
 
-namespace MathUtils {
-  export function add(a: number, b: number) {
+export class MathUtils {
+  static add(a: number, b: number): AddOutput {
     CommonUtils.log(`Adding ${a} and ${b}`);
-    return a + b;
+    return {
+      sum: a + b,
+      class: 'MathUtils'
+    };
   }
 
-  export function subtract(a: number, b: number) {
+  static subtract(a: number, b: number) {
     return a - b;
   }
 }
