@@ -1,11 +1,11 @@
-import { add } from "./calculator";
+import { User } from "./user.js";
 
-// (alias) add(a: number, b: number): number (+3 overloads)
-// import add
-const sum = add(5, 3);
-// (alias) add(a: string, b: number): string (+3 overloads)
-// import add
-const concatenated = add('5', 3);
-// (alias) add(a: string, b: string): string (+3 overloads)
-// import add
-const strings = add('Hello', 'World');
+const newUser: User.UserProfile = User.createUser(1, 'John Doe');
+const updatedUser = User.updateUser(1, {
+  id: 1,
+  name: 'Mark Doe',
+  status: 'active',
+});
+
+console.log(newUser);
+console.log(updatedUser);
