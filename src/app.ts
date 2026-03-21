@@ -1,3 +1,4 @@
-import { add } from './calculator.js';
+import { createUserProfile } from "./user.js";
 
-console.log(add(1, 12));
+const userProfile = createUserProfile(1, 'John Doe');
+console.log(userProfile);
