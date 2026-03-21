@@ -1,5 +1,7 @@
-import { AdminUser } from "./user.js";
+const user = AuthService.login('user', 'password123');
 
-const userAdmin = new AdminUser();
-console.log(userAdmin.createUser('Bob'));
-userAdmin.showGreeting();
+if (AuthService.isLoggedIn()) {
+  console.log('User is logged in');
+} else {
+  console.log('Login failed');
+}
