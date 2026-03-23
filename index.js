@@ -1,12 +1,10 @@
-const express = require('express');
-
+import express, {} from 'express';
 const app = express();
 const port = 3001;
-
 app.get('/', (req, res) => {
-  res.send('Express application');
+    res.send('Express application');
 });
-
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at http://localhost:${port}`);
 });
+//# sourceMappingURL=index.js.map
