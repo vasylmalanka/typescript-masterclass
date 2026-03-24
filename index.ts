@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+
 import express, { type Request, type Response, type Express } from 'express';
 import { Page } from './src/page.js';
 import { Post } from './src/post.js';
@@ -16,7 +18,7 @@ app.post('/create-post', (req: Request, res: Response) => {
 });
 
 app.post('/create-page', (req: Request, res: Response) => {
-  let post = new Page('http://page.com', new User('John'));
+  let page = new Page('http://page.com', new User('John'));
   res.send('Page Created');
 });
 
