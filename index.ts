@@ -1,16 +1,12 @@
 import 'reflect-metadata';
 
-import express, { type Request, type Response, type Express } from 'express';
-import { tasksRouter } from './tasks/tasks.router.js';
+import express, { type Express } from 'express';
+import { addRoutes } from './src/config/routes.config.js';
 
 const app: Express = express();
 const port = 3001;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express application');
-});
-
-app.use('/tasks', tasksRouter);
+addRoutes(app);
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);

@@ -1,12 +1,20 @@
 import { Router, type Request, type Response } from 'express';
-import { container } from '../src/config/container.js';
 import { TasksController } from './tasks.controller.js';
+import { injectable, inject } from 'inversify';
 
-export const tasksRouter: Router = Router();
+@injectable()
+export class TasksRouter {
+  public router: Router;
 
-const tasksController: TasksController = container.get<TasksController>(TasksController);
+  constructor(@inject(TasksController) private tasksController: TasksController) {
+    this.router = Router();
+    this.initializeRoutes();
+  }
 
-tasksRouter.post('/create', (req: Request, res: Response) => {
-  const newTask = tasksController.createTask();
-  return res.json(newTask);
-});
+  private initializeRoutes() {
+    this.router.post('/create', (req: Request, res: Response) => {
+      const newTask = this.tasksController.createTask();
+      return res.json(newTask);
+    });
+  }
+}
