@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import express, { type Request, type Response, type Express } from 'express';
-import { Page } from './src/page.js'; 
+import { TasksController } from './tasks/tasks.controller.js';
 import { container } from './src/config/container.js';
 
 const app: Express = express();
@@ -11,10 +11,11 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Express application');
 });
 
-const pageClass = container.get<Page>(Page);
-app.post('/create-page', (req: Request, res: Response) => {
-  let page = pageClass.createPage('https://mypage.com'); 
-  res.json(page);
+const task = container.get<TasksController>(TasksController);
+
+app.post('/tasks', (req: Request, res: Response) => {
+  const newTask = task.createTask();
+  return res.json(newTask);
 });
 
 app.listen(port, () => {
