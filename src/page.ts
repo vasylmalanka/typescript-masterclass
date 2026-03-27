@@ -1,5 +1,14 @@
-import type { User } from "./user.js";
+import { User } from "./user.js";
+import { injectable, inject } from 'inversify';
 
+@injectable()
 export class Page {
-    constructor(public url: string, public user: User) {}
+    constructor(@inject(User) private user: User) {}
+
+    public createPage(url: string) {
+        return {
+            pageUrl: url,
+            user: this.user,
+        }
+    }
 }
