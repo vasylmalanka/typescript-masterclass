@@ -23,8 +23,11 @@
   "dependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.5.0",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "inversify": "^8.1.0",
+    "mongodb": "^6.13.0",
+    "mongoose": "^8.10.1",
     "reflect-metadata": "^0.2.2",
     "typescript": "^5.9.3"
   },
