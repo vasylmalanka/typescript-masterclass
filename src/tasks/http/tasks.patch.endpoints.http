@@ -1,4 +1,7 @@
 PATCH http://localhost:3001/tasks/update
 Content-Type: application/json
 
-{}
+{
+  "_id": "69ecbf9213f513a760610048",
+  "title": "New title"
+}
