@@ -3,6 +3,7 @@ import { TasksController } from './tasks.controller.js';
 import { injectable, inject } from 'inversify';
 import type { IPartialTaskWithId, ITask } from './task.interface.js';
 import { createTaskValidator } from './validators/createTask.validator.js';
+import { updateTaskValidator } from './validators/updateTask.calidator.js';
 import { validationResult } from 'express-validator';
 import { getTaskValidator } from './validators/getTasks.validator.js';
 import { StatusCodes } from 'http-status-codes';
@@ -43,9 +44,18 @@ export class TasksRouter {
       },
     );
 
-    this.router.patch('/update', async (req: Request<{}, {}, IPartialTaskWithId>, res: Response) => {
-      const updatedTask = await this.tasksController.handlePatchTasks(req);
-      res.status(StatusCodes.OK).json(updatedTask);
-    });
+    this.router.patch(
+      '/update',
+      updateTaskValidator,
+      async (req: Request<{}, {}, IPartialTaskWithId>, res: Response) => {
+        const result = validationResult(req);
+        if (result.isEmpty()) {
+          const updatedTask = await this.tasksController.handlePatchTasks(req);
+          res.status(StatusCodes.OK).json(updatedTask);
+        } else {
+          res.status(StatusCodes.BAD_REQUEST).json(result.array());
+        }
+      }
+  );
   }
 }

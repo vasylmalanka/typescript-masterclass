@@ -4,6 +4,7 @@ import type { IPartialTaskWithId, ITask } from './task.interface.js';
 import { Document } from 'mongoose';
 import { TaskService } from './tasks.service.js';
 import { UpdateTaskProvider } from './providers/updateTask.provider.js';
+import { matchedData } from 'express-validator';
 
 @injectable()
 export class TasksController {
@@ -26,8 +27,10 @@ export class TasksController {
   public async handlePatchTasks(
     req: Request<{}, {}, IPartialTaskWithId>,
   ): Promise<Document | never> {
+    const validatedData: IPartialTaskWithId = matchedData(req);
+
     try {
-      return await this.updateTaskProvider.updateTask(req.body);
+      return await this.updateTaskProvider.updateTask(validatedData);
     } catch (error: any) {
       throw new Error(error);
     }
