@@ -5,11 +5,19 @@ import { addRoutes } from './src/config/routes.config.js';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import { responseFormatter } from './src/middleware/responseFormatter.middleware.js';
+import cors from 'cors';
+import type { CorsOptions } from 'cors';
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT;
+
+let corsOptions: CorsOptions = {
+  origin: 'http://example.com',
+};
+
+app.use(cors());
 
 app.use(express.json());
 app.use(responseFormatter);
