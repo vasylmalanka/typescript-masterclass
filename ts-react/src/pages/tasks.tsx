@@ -1,4 +1,5 @@
 import type { FC, ReactElement } from "react";
+import { TasksCounter } from '@/components/tasksCounter/tasksCounter';
 
 export const Tasks: FC = (): ReactElement => {
   return (
@@ -7,9 +8,9 @@ export const Tasks: FC = (): ReactElement => {
         <div className="flex flex-col w-4/5 p-4">
           <h1 className="text-white font-bold text-2xl mb-8">Tasks as on: Saturday, 1 Mar 2025</h1>
           <div className="flex justify-around">
-            <p className="text-white">Counter 1</p>
-            <p className="text-white">Counter 2</p>
-            <p className="text-white">Counter 3</p>
+            <TasksCounter/>
+            <TasksCounter/>
+            <TasksCounter/>
           </div>
         </div>
       </section>
